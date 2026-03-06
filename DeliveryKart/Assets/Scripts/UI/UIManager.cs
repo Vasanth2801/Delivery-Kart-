@@ -1,0 +1,31 @@
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public class UIManager : MonoBehaviour
+{
+    public static UIManager Instance;
+    public GameObject winScreen;
+
+    void Awake()
+    {
+        if(Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(1);
+    }
+
+    public void MainMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+}
