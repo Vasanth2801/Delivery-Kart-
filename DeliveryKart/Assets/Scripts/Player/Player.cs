@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -5,6 +6,8 @@ public class Player : MonoBehaviour
     [Header("Movement Settings")]
     [SerializeField] private float steerSpeed = 1f;
     [SerializeField] private float moveSpeed = 20f;
+    [SerializeField] private float boostSpeed = 30f;
+    [SerializeField] private float slowSpeed = 10f;
 
     [Header("Inputs")]
     [SerializeField] private float steerAmount;
@@ -50,6 +53,19 @@ public class Player : MonoBehaviour
         else if(moveAmount == 0 || steerAmount == 0)
         {
             musicSource.Stop();
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        moveSpeed = slowSpeed;
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "BoostSpeed")
+        {
+            moveSpeed = boostSpeed;
         }
     }
 }
